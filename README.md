@@ -1,5 +1,7 @@
 # NUXT_JS_GERLESSVER
 
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/edinaldorodriguesceara/nuxt_js_gerlessver/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/edinaldorodriguesceara/nuxt_js_gerlessver/tree/master)
+
 <p align="center">
   <img src="https://nuxt.com/assets/design-kit/icon-green.svg" alt="Nuxt.js Logo" width="150"/>
 </p>
