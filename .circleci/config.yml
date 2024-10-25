@@ -1,0 +1,35 @@
+version: 2.1
+
+workflows:
+  ci:
+    jobs:
+      - back
+
+jobs:
+  back:
+    machine:
+      image: ubuntu-2204:current
+      docker_layer_caching: true
+    resource_class: medium
+    working_directory: ~/nuxt_gerlessver
+    steps:
+      - checkout
+      - run:
+          name: Build
+          command: |
+            ARG_USER_UID=$(id -u) ARG_USER_GID=$(id -g) docker compose config
+            ARG_USER_UID=$(id -u) ARG_USER_GID=$(id -g) docker compose build
+      - restore_cache:
+          name: Restore Cache
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+      - run:
+          name: Up
+          command: docker compose up -d
+      - run:
+          name: Install Dependencies
+          command: docker compose exec app npm install
+      - save_cache:
+          name: Save Cache
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - ./node_modulesj
